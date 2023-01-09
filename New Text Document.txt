@@ -1,14 +1,3 @@
-/*https://www.matteomattei.com/client-and-server-ssl-mutual-authentication-with-nodejs/
-
-^
-^
-^
-works only js code, openssl commands do not work -> will try use correct localhost-domain and include passphrase in js*/
-
-
-
-
-
 // this is used for ssl generation -> https://www.samltool.com/self_signed_certs.php
 
 // use for combine key and cert into .pfx
