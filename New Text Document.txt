@@ -1,0 +1,23 @@
+/*https://www.matteomattei.com/client-and-server-ssl-mutual-authentication-with-nodejs/
+
+^
+^
+^
+works only js code, openssl commands do not work -> will try use correct localhost-domain and include passphrase in js*/
+
+
+
+
+
+// this is used for ssl generation -> https://www.samltool.com/self_signed_certs.php
+
+// use for combine key and cert into .pfx
+// openssl pkcs12 -export -out ph-certandkey.pfx -inkey ph-key.txt -in ph-cert.txt
+
+// this command extracts key from .pfx
+// openssl pkcs12 -in ph-certandkey.pfx -nocerts -out extracted-ph-key.txt -nodes
+
+// this command extracts cert from .pfx
+// openssl pkcs12 -in ph-certandkey.pfx -clcerts -nokeys -out extracted-ph-cert.txt
+
+// IMPORTANT! -> Postman [uses .pfx only] OR [need both CRT and KEY]
