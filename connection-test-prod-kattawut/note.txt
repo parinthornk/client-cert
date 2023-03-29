@@ -1,0 +1,2 @@
+// combine crt and key to pfx
+openssl pkcs12 -export -out out.pfx -inkey CPIS_GPSC.key -in star_pttgrp_com.crt
