@@ -1,0 +1,26 @@
+<parameter name="customSSLProfiles">
+	<!-- For SSL Handshake configure only trust store-->
+	<profile>
+		<servers>localhost:port</servers>
+		<TrustStore>
+			<Location>repository/resources/security/client-truststore.jks</Location>
+			<Type>JKS</Type>
+			<Password>wso2carbon</Password>
+		</TrustStore>
+	</profile>
+	<!-- For Mutual SSL Handshake configure both trust store and key store-->
+	<profile>
+		<servers>prd-sg.it-cpi004-rt.cfapps.ap11.hana.ondemand.com:443</servers>
+		<TrustStore>
+			<Location>repository/resources/security/client-truststore.jks</Location>
+			<Type>JKS</Type>
+			<Password></Password><!-- no password ????? -->
+		</TrustStore>
+		<KeyStore>
+			<Location>repository/resources/security/wso2carbon.jks</Location>
+			<Type>JKS</Type>
+			<Password></Password><!-- no password ????? -->
+			<KeyPassword></KeyPassword><!-- no password ????? -->
+		</KeyStore>
+	</profile>
+</parameter>

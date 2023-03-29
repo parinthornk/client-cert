@@ -1,0 +1,379 @@
+[transport.https.properties]
+proxyPort = 443
+
+[server]
+hostname = "apimpt-dev.pttgrp.com"
+node_ip = "10.224.183.16"
+#offset=0
+mode = "single" #single or ha
+base_path = "${carbon.protocol}://${carbon.host}:${carbon.management.port}"
+#discard_empty_caches = false
+server_role = "default"
+
+[super_admin]
+username = "admin"
+password = "PTTGRP_API19"
+create_admin_account = true
+
+[user_store]
+type = "database_unique_id"
+#type = "database"
+
+[database.apim_db]
+type = "oracle"
+url = "jdbc:oracle:thin:@10.232.108.220:1562/PTTGRPWSO2DEV"
+username = "AM_API"
+password = "WSO2PTTGRP"
+driver = "oracle.jdbc.driver.OracleDriver"
+validationQuery = "SELECT 1 FROM DUAL"
+
+[database.shared_db]
+type = "oracle"
+url = "jdbc:oracle:thin:@10.232.108.220:1562/PTTGRPWSO2DEV"
+username = "REG_API"
+password = "WSO2PTTGRP"
+driver = "oracle.jdbc.driver.OracleDriver"
+validationQuery = "SELECT 1 FROM DUAL"
+
+[database.user]
+type = "oracle"
+url = "jdbc:oracle:thin:@10.232.108.220:1562/PTTGRPWSO2DEV"
+username = "UM_API"
+password = "WSO2PTTGRP"
+driver = "oracle.jdbc.driver.OracleDriver"
+validationQuery = "SELECT 1 FROM DUAL"
+
+[keystore.tls]
+file_name =  "newwso2carbon.jks"
+type =  "JKS"
+password =  "P@ssw0rd"
+alias =  "pttgrp.com"
+key_password =  "P@ssw0rd"
+
+[keystore.primary]
+file_name =  "newwso2carbon.jks"
+type =  "JKS"
+password =  "P@ssw0rd"
+alias =  "pttgrp.com"
+key_password =  "P@ssw0rd"
+
+[keystore.internal]
+file_name =  "wso2carbon.jks"
+type =  "JKS"
+password =  "P@ssw0rd"
+alias =  "pttgrp.com"
+key_password =  "P@ssw0rd"
+
+[[apim.gateway.environment]]
+name = "Production and Sandbox"
+type = "hybrid"
+display_in_api_console = true
+description = "This is a hybrid gateway that handles both production and sandbox token traffic."
+show_as_token_endpoint_url = false
+service_url = "https://apimpt-dev.pttgrp.com/services/"
+username= "${admin.username}"
+password= "${admin.password}"
+ws_endpoint = "ws://localhost:9099"
+wss_endpoint = "wss://localhost:8099"
+#http_endpoint = "http://apimpt-dev.pttgrp.com:8280"
+https_endpoint = "https://apimgw-dev.pttgrp.com"
+
+#[apim.cache.gateway_token]
+#enable = true
+#expiry_time = "900s"
+
+#[apim.cache.resource]
+#enable = true
+#expiry_time = "900s"
+
+#[apim.cache.km_token]
+#enable = false
+#expiry_time = "15m"
+
+#[apim.cache.recent_apis]
+#enable = false
+
+#[apim.cache.scopes]
+#enable = true
+
+#[apim.cache.publisher_roles]
+#enable = true
+
+#[apim.cache.jwt_claim]
+#enable = true
+#expiry_time = "15m"
+
+#[apim.cache.tags]
+#expiry_time = "2m"
+
+[apim.analytics]
+enable = true
+store_api_url = "https://grp-apia-t01.pttgrp.corp:7444"
+#username = "$ref{super_admin.username}"
+#password = "$ref{super_admin.password}"
+username = "admin"
+password = "admin"
+event_publisher_type = "default"
+#event_publisher_impl = "org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher"
+publish_response_size = true
+
+#[apim.analytics]
+#enable = false
+#store_api_url = "https://localhost:7444"
+#username = "$ref{super_admin.username}"
+#password = "$ref{super_admin.password}"
+#event_publisher_type = "default"
+#event_publisher_impl = "org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher"
+#publish_response_size = true
+
+[[apim.analytics.url_group]]
+analytics_url =["tcp://10.224.183.17:7612"]
+analytics_auth_url =["ssl://10.224.183.17:7712"]
+#analytics_auth_url =["ssl://10.224.183.17:7711"]
+type = "loadbalance"
+
+#[[apim.analytics.url_group]]
+#analytics_url =["tcp://analytics1:7611","tcp://analytics2:7611"]
+#analytics_auth_url =["ssl://analytics1:7711","ssl://analytics2:7711"]
+#type = "loadbalance"
+
+#[[apim.analytics.url_group]]
+#analytics_url =["tcp://analytics1:7612","tcp://analytics2:7612"]
+#analytics_auth_url =["ssl://analytics1:7712","ssl://analytics2:7712"]
+#type = "failover"
+
+#[apim.key_manager]
+#service_url = "https://apimpt-dev.pttgrp.com/services/"
+#username = "$ref{super_admin.username}"
+#password = "$ref{super_admin.password}"
+#pool.init_idle_capacity = 50
+#pool.max_idle = 100
+#key_validation_handler_type = "default"
+#key_validation_handler_type = "custom"
+#key_validation_handler_impl = "org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler"
+
+[apim.idp]
+server_url = "https://apimpt-dev.pttgrp.com"
+authorize_endpoint = "https://apimpt-dev.pttgrp.com/oauth2/authorize"
+oidc_logout_endpoint = "https://apimpt-dev.pttgrp.com/oidc/logout"
+oidc_check_session_endpoint = "https://apimpt-dev.pttgrp.com/oidc/checksession"
+
+[apim.jwt]
+enable = false
+#encoding = "base64" # base64,base64url
+#generator_impl = "org.wso2.carbon.apimgt.keymgt.token.JWTGenerator"
+#claim_dialect = "http://wso2.org/claims"
+#convert_dialect = false
+#header = "X-JWT-Assertion"
+#signing_algorithm = "SHA256withRSA"
+#enable_user_claims = true
+#claims_extractor_impl = "org.wso2.carbon.apimgt.impl.token.ExtendedDefaultClaimsRetriever"
+
+[apim.oauth_config]
+#enable_outbound_auth_header = false
+#auth_header = "Authorization"
+#revoke_endpoint = "https://apigwt-dev.pttgrp.com/revoke"
+revoke_endpoint = "https://apimpt-dev.pttgrp.com/revoke"
+#enable_token_encryption = false
+#enable_token_hashing = false
+
+[apim.devportal]
+#url = "https://apimpt-dev.pttgrp.com:/devportal"
+url = "https://apimpt-dev.pttgrp.com/devportal"
+#enable_application_sharing = false
+#if application_sharing_type, application_sharing_impl both defined priority goes to application_sharing_impl
+#application_sharing_type = "default" #changed type, saml, default #todo: check the new config for rest api
+#application_sharing_impl = "org.wso2.carbon.apimgt.impl.SAMLGroupIDExtractorImpl"
+#display_multiple_versions = false
+#display_deprecated_apis = false
+#enable_comments = true
+#enable_ratings = true
+#enable_forum = true
+#enable_anonymous_mode=true
+
+
+[apim.cors]
+allow_origins = "*"
+allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
+allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction","apikey", "testKey"]
+allow_credentials = false
+
+[apim.throttling]
+#service_url = "https://apimpt-dev.pttgrp.com/services/"
+service_url = "https://apimpt-dev.pttgrp.com/services/"
+enable_header_based_throttling = true
+enable_jwt_claim_based_throttling = true
+enable_query_param_based_throttling = true
+#enable_data_publishing = true
+#enable_policy_deploy = true
+#enable_blacklist_condition = true
+#enable_persistence = true
+throttle_decision_endpoints = ["tcp://localhost:5672"]
+
+#[apim.throttling.blacklist_condition]
+#start_delay = "5m"
+#period = "1h"
+
+[apim.throttling.jms]
+#start_delay = "5m"
+password = "PTTGRP_API19"
+
+#[apim.throttling.event_sync]
+#hostName = "0.0.0.0"
+#port = 11224
+
+#[apim.throttling.event_management]
+#hostName = "0.0.0.0"
+#port = 10005
+
+#[[apim.throttling.url_group]]
+#traffic_manager_urls = ["tcp://localhost:9611","tcp://localhost:9611"]
+#traffic_manager_auth_urls = ["ssl://localhost:9711","ssl://localhost:9711"]
+#type = "loadbalance"
+
+#[[apim.throttling.url_group]]
+#traffic_manager_urls = ["tcp://localhost:9611","tcp://localhost:9611"]
+#traffic_manager_auth_urls = ["ssl://localhost:9711","ssl://localhost:9711"]
+#type = "failover"
+
+#[apim.workflow]
+#enable = false
+#service_url = "https://localhost:9445/bpmn"
+#username = "$ref{super_admin.username}"
+#password = "$ref{super_admin.password}"
+#callback_endpoint = "https://localhost:${mgt.transport.https.port}/api/am/admin/v0.17/workflows/update-workflow-status"
+#token_endpoint = "https://localhost:${https.nio.port}/token"
+#client_registration_endpoint = "https://localhost:${mgt.transport.https.port}/client-registration/v0.17/register"
+#client_registration_username = "$ref{super_admin.username}"
+#client_registration_password = "$ref{super_admin.password}"
+
+#data bridge config
+#[transport.receiver]
+#type = "binary"
+#worker_threads = 10
+#session_timeout = "30m"
+#keystore.file_name = "$ref{keystore.tls.file_name}"
+#keystore.password = "$ref{keystore.tls.password}"
+#tcp_port = 9611
+#ssl_port = 9711
+#ssl_receiver_thread_pool_size = 100
+#tcp_receiver_thread_pool_size = 100
+#ssl_enabled_protocols = ["TLSv1","TLSv1.1","TLSv1.2"]
+#ciphers = ["SSL_RSA_WITH_RC4_128_MD5","SSL_RSA_WITH_RC4_128_SHA"]
+
+#[apim.notification]
+#from_address = "APIM.com"
+#username = "APIM"
+#password = "APIM+123"
+#hostname = "localhost"
+#port = 3025
+#enable_start_tls = false
+#enable_authentication = true
+
+#[apim.token.revocation]
+#notifier_impl = "org.wso2.carbon.apimgt.keymgt.events.TokenRevocationNotifierImpl"
+#enable_realtime_notifier = true
+#realtime_notifier.ttl = 5000
+#enable_persistent_notifier = true
+#persistent_notifier.hostname = "https://localhost:2379/v2/keys/jti/"
+#persistent_notifier.ttl = 5000
+#persistent_notifier.username = "root"
+#persistent_notifier.password = "root"
+
+[[event_handler]]
+name="userPostSelfRegistration"
+subscriptions=["POST_ADD_USER"]
+
+[service_provider]
+sp_name_regex = "^[\\sa-zA-Z0-9._-]*$"
+
+[database.local]
+url = "jdbc:h2:./repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE"
+
+[[event_listener]]
+id = "token_revocation"
+type = "org.wso2.carbon.identity.core.handler.AbstractIdentityHandler"
+name = "org.wso2.is.notification.ApimOauthEventInterceptor"
+order = 1
+[event_listener.properties]
+notification_endpoint = "https://apimpt-dev.pttgrp.com/internal/data/v1/notify"
+username = "${admin.username}"
+password = "${admin.password}"
+'header.X-WSO2-KEY-MANAGER' = "default"
+
+### added on 2023-03-29, test Mutual-SSL with GPSC CPI
+[transport.passthru_https.sender.ssl_profile]
+file_path = "repository/deployment/server/mutual_ssl_profiles_gpsc_cpi.xml"
+interval = 3600000
+
+### add on 14/10/2020
+
+[transport.passthru_https.sender.parameters]
+HostnameVerifier = "AllowAll"
+
+[transport.client]
+default_max_connection_per_host = 1000
+max_total_connections = 30000
+
+[database.user.pool_options]
+maxActive = 50
+maxWait = 60000
+testOnBorrow =  true
+validationInterval = 30000
+defaultAutoCommit = true
+
+[apim.auth_manager]
+service_url = "https://apimpt-dev.pttgrp.com/services/"
+
+[realm_manager]
+data_source = "WSO2USER_DB"
+
+### add on 15/10/2020
+
+[indexing]
+re_indexing= 1
+
+### add on 27/10/2020  Support for revoking access tokens bound to a session expired due to idle time out
+[identity_mgt.events.schemes.TokenBindingExpiryEventHandler.properties]
+enable = true
+
+[oauth]
+token_validation.app_access_token_validity = 10000
+timestamp_skew = 100
+
+###add on 14012022
+###[oauth.token_renewal] 
+###renew_access_token_per_request = false
+
+##add 17012022
+[oauth.access_token]
+invoke_token_revocation_event_on_renewal = false
+
+## CVE-ID:  CVE-2022-29464 Add on 28/4/2022
+[[resource.access_control]]
+context="(.*)/fileupload/resource(.*)"
+secure=false
+http_method = "all"
+ 
+[[resource.access_control]]
+context="(.*)/fileupload/(.*)"
+secure=true
+http_method = "all"
+permissions = ["/permission/protected/"]
+
+###(WSO2-2022-2177) Broken Authentication Vulnerability in REST API Endpoints 
+[[resource.access_control]]
+context="(.*)/((\\.+)|(.*;+.*)|%2e)/(.*)"
+secure=true
+http_method="all"
+
+[carbon_health_check]
+enable = true
+
+[carbon_health_check.health_checker.data_source_health_checker]
+enable = true
+pool_usage_limit_percentage = "80"
+order = "97"
+
+[carbon_health_check.health_checker.data_source_health_checker.properties]
+'monitored.datasources' = "jdbc/WSO2CarbonDB,jdbc/WSO2AM_DB,jdbc/SHARED_DB,jdbc/WSO2USER_DB,WSO2MBStoreDB"
