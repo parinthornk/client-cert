@@ -14,13 +14,13 @@
 		<TrustStore>
 			<Location>repository/resources/security/client-truststore.jks</Location>
 			<Type>JKS</Type>
-			<Password></Password><!-- no password ????? -->
+			<Password></Password><!-- password is empty ????? -->
 		</TrustStore>
 		<KeyStore>
 			<Location>repository/resources/security/wso2carbon.jks</Location>
 			<Type>JKS</Type>
-			<Password></Password><!-- no password ????? -->
-			<KeyPassword></KeyPassword><!-- no password ????? -->
+			<Password></Password><!-- password is empty ????? -->
+			<KeyPassword></KeyPassword><!-- password is empty ????? -->
 		</KeyStore>
 	</profile>
 </parameter>
